@@ -7,28 +7,35 @@ import { Subject } from "rxjs";
 @Injectable()
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>()
+  // this information is now stored on firebase
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Test Soup',
+  //     'Pretend soup, for testing purposes',
+  //     'https://placekitten.com/200/200',
+  //     [
+  //       new Ingredient('Imagination', 42),
+  //       new Ingredient('Broth', 2),
+  //       new Ingredient('Unicorn Dust', 456)
+  //     ]),
+  //   new Recipe(
+  //     'Test Omlette',
+  //     'Pretend omlette, for testing purposes',
+  //     'https://placekitten.com/250/250',
+  //     [
+  //       new Ingredient('Imagination', 18),
+  //       new Ingredient('Eggs', 3)
+  //     ])
+  // ];
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Test Soup',
-      'Pretend soup, for testing purposes',
-      'https://placekitten.com/200/200',
-      [
-        new Ingredient('Imagination', 42),
-        new Ingredient('Broth', 2),
-        new Ingredient('Unicorn Dust', 456)
-      ]),
-    new Recipe(
-      'Test Omlette',
-      'Pretend omlette, for testing purposes',
-      'https://placekitten.com/250/250',
-      [
-        new Ingredient('Imagination', 18),
-        new Ingredient('Eggs', 3)
-      ])
-  ];
+  private recipes: Recipe[] = [];
 
   constructor(private shoppingListService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();  //returns an exact copy of the recipe array, not the array itself
