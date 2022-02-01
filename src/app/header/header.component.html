@@ -8,7 +8,7 @@
       <ul class="nav navbar-nav">
         <li routerLinkActive="active" *ngIf="isAuthenticated"><a routerLink="/recipes">Recipes</a></li>
         <li routerLinkActive="active" *ngIf="!isAuthenticated"><a routerLink="/auth">Authenticate</a></li>
-        <li routerLinkActive="active"><a routerLink="/shopping-list">Grocery List</a></li>
+        <li routerLinkActive="active" *ngIf="isAuthenticated"><a routerLink="/shopping-list">Grocery List</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li style="cursor: pointer;" *ngIf="isAuthenticated" (click)="onLogout()"><a>Logout</a></li>
